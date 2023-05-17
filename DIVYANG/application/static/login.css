@@ -1,0 +1,85 @@
+body {
+	background: url(test.jpg) ;
+  background-size: cover;
+  background-position: center;
+	color: #ffffff;
+	font-family: "Montserrat", sans-serif;
+  }
+  
+  .header{
+    background-color: transparent;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    
+  }
+
+  .wrapper{
+    position: relative;
+    margin-left: 40%;
+    margin-top: 5%;
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+    background-color: transparent;
+    width: 300px;
+    height: 440px;
+    color: azure;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    border-radius: 2px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  }
+  .input-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+    justify-content: center;
+    margin-top: 70%;
+    margin-bottom: 10px;
+  }
+  .image-container{
+    width: 10px;
+    height: 40px;
+  }
+  .avatar{
+    width: 150px;
+    height: 150px;
+    margin-left: 60px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-radius: 100px;
+  }
+  .input-box-1{
+    margin-top: 20px;
+    justify-content: space-between;
+  }
+  .info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .image{
+    margin-left: 55%;
+    margin-top: 11%;
+  }
+  .info h6 i{
+    font-size: 70%;
+  }
+ 
+ 
+  .button{
+    margin-top: 40px;
+    margin-left: 70px;
+    width: 50%;
+    background-color:rgb(167, 161, 161);
+    color:black
+
+  }
+  .button:hover{
+    color: #ffffff;
+  }
+

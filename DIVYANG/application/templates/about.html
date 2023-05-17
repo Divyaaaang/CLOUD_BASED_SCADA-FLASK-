@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        /* Add some basic styles to the chart container */
+        .header {
+            color: azure;
+            display: flex;
+            padding-left: 40%;
+            padding-top: 0%;
+            position: relative;
+           
+        }
+        .left {
+            flex: 1;
+            padding: 50px;
+            text-align: center;
+        }
+        .right {
+            flex: 1;
+            position: relative;
+            text-align: center;
+        }
+
+        video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .image{
+            position:fixed;
+            left: 35%;
+            bottom: 20px;
+        }
+
+        .image img{
+            width: 90%;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            color: aliceblue;
+            width: 80%;
+            font-size: 120%;
+            margin-left: 20px;
+        
+      
+        }
+        .left{
+            backdrop-filter: blur(5px);
+            background-color: rgba(98, 94, 94, 0.5);
+            border-radius: 20px;
+            height: 40%;
+        }
+        .top {
+            flex: 1;
+            position: relative;
+            text-align: center;
+        }
+
+        .image1{
+            position:fixed;
+            left: 60%;
+            bottom: 20px;
+            top: 15%;
+        }
+        .image1 img{
+            width: 80%;
+        }
+        .container1 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 60%;
+            left: 58%;
+            right: 0;
+            bottom: 0;
+            color: aliceblue;
+            width: 30%;
+            font-size: 110%;
+            margin-left: 10px;
+        }
+        .bottom{
+            backdrop-filter: blur(5px);
+            background-color: rgba(98, 94, 94, 0.5);
+            border-radius: 20px;
+            height: 80%;
+        }
+              
+    </style>
+</head>
+<body>
+    <video src="/static/back.mp4" loop autoplay muted></video>
+
+    <div class="header">
+        <h1>FBD-Fluid Bed Dryer</h1>
+    </div>
+    <div class="container">
+        <div class="left">
+            <p>Fluid Bed Dryers (FBDs) are drying machines used in the pharmaceutical sector to dry wet granules and powders. Hot air is used by the FBD machine to fluidize and dry the materials, which are fed into the machine from the top. Hot air is forced through the material's perforated bed, causing it to fluidize and produce a fluid-like condition. The moisture in the material is absorbed by the heated air, which is then taken out of the machine via an exhaust duct.
+
+                FBD machines are available in a variety of sizes and configurations, and they may be customised to handle a variety of materials. They are extensively employed in the manufacture of tablets, capsules, and other solid dosage forms.</p>
+        </div>
+  
+        <div class="right">
+            <div class="image">
+                <img src="/static/FBD.png" alt="Image">
+            </div>
+        </div>
+        <div class="top">
+            <div class="image1">
+                <img src="/static/box.png" alt="Image">
+            </div>
+        </div>
+        <div class="container1">
+            <div class="bottom">
+                <p>FBD machines are available in a variety of sizes and configurations, and they may be customised to handle a variety of materials.FBD machines are available in a variety of sizes and configurations, and they may be customised to handle a variety of materials. </p>
+                
+            </div>
+
+</body>
+</html>

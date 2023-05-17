@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alarm</title>
+    <style>
+         body{
+            background-color: rgb(179, 203, 248);
+            margin: 0%;
+        }
+        /* Add some basic styles to the chart container */
+        #chart-container {
+            width: 80%;
+            height: 80px;
+            margin-left: 15%;
+            margin-top: 40px
+            
+        }
+        .apexcharts-xaxis-label {
+            font-size: 45%; /* Change the font size to your desired value */
+            font-weight: bold;
+        }
+        .header{
+            color: azure;
+            display: flex;
+            padding-left: 45%;
+            padding-top: 0%;
+            background-color: #1c6bd3;
+            letter-spacing: 10px;
+        } 
+        .error-message {
+    background-color: #f2dbdb;
+    color: #1d1c1c;
+    margin-top: 20px;
+    margin-left: 35%;
+    margin-right: 35%;
+    padding: 10px;
+    text-align: center;
+    font-weight: bolder;
+    animation: pulse 1s infinite; /* Add animation properties */
+}
+
+@keyframes pulse {
+    0% {
+        background-color: #f2dbdb;
+    }
+    50% {
+        background-color: rgb(243, 50, 50);
+    }
+    100% {
+        background-color: #f2dbdb;
+    }
+}
+
+    </style>
+</head>
+<body> 
+    <div class="header">
+        <h1>ALARM</h1>
+    </div> 
+    <div>
+        <label for="graph-type">Graph Type:</label>
+        <select id="graph-type" onchange="selectGraphType()">
+            <option value="bar">Bar Graph</option>
+            <option value="line">Line Graph</option>
+        </select>
+    </div>
+    
+    <div id="chart-container"></div>
+    
+    <div id="error-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.27.3/dist/apexcharts.min.js"></script>
+    <script>
+        function selectGraphType() {
+            const graphType = document.getElementById("graph-type").value;
+            let url;
+            if (graphType === "bar") {
+                url = "http://localhost:5000/bar";
+            } else if (graphType === "line") {
+                url = "http://localhost:5000/line";
+            }
+            window.location.href = url;
+        }
+
+        // Use fetch to get the data from the Flask API
+        fetch('/a')
+        .then(response => response.json())
+        .then(data => {
+            // Extract the month data from the response
+            const names = data.map(d => d.name);
+
+            // Count the number of occurrences of each month
+            const counts = {};
+            for (const name of names) {
+                counts[name] = (counts[name] || 0) + 1;
+            }
+
+            // Check if the number of emergency stops is 5 or above
+            if (counts['EMERGENCY STOP'] >= 5) {
+                const errorContainer = document.getElementById("error-container");
+                const errorMessage = document.createElement("div");
+                errorMessage.className = "error-message";
+                errorMessage.textContent = "ALERT: EMERGENCY STOP OCCURED MORE THAN 5 TIMES";
+                errorContainer.appendChild(errorMessage);
+            }
+            if (counts['POWER FAILURE'] >= 2) {
+                const errorContainer = document.getElementById("error-container");
+                const errorMessage = document.createElement("div");
+                errorMessage.className = "error-message";
+                errorMessage.textContent = "ALERT: POWER FAILURE OCCURED MORE THAN 2 TIMES";
+                errorContainer.appendChild(errorMessage);
+            }
+
+        // Convert the counts object to an array of objects with label and value properties
+        const chartData = Object.entries(counts).map(([label, value]) => ({
+            label,
+            value
+        }));
+                // Create a new ApexCharts instance with the chart data
+                const chart = new ApexCharts(document.querySelector('#chart-container'), {
+                    series: [{
+                        data: chartData.map(d => d.value)
+                    }],
+                    xaxis: {
+                        categories: chartData.map(d => d.label),  
+                    },
+                    chart: {
+                        type: 'bar',
+                        height: 500,
+                        width:1000,
+                        
+                    },
+                    
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '60%',
+                            endingShape: 'rounded',
+                        },
+                    },
+                    
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 1,
+                        colors: ['#00008B']
+                    },
+                    grid: {
+                        borderColor: '#FF0001',
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function (val) {
+                                return val
+                            }
+                        }
+                    }
+                });
+
+
+                // Render the chart
+                chart.render();
+            })
+            .catch(error => console.error(error));
+            
+    </script>
+</body>
+</html>

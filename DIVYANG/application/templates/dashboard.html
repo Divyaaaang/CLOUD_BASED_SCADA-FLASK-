@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!--CHARTS-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link rel="stylesheet"
+    href="{{url_for('static',filename='style.css')}}">
+  </head>
+  <body>
+    
+    <div class="grid-container">
+    
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon">
+            <i class='bx bx-menu'>Menu</i>
+        </div>
+        <div class="header-left">
+          <h2>DASHBOARD</h2>
+            
+        </div>
+        <div class="header-right">
+            <i class='bx bx-bell'></i>
+            <i class='bx bx-envelope'></i>
+            <i class='bx bx-cog'></i>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+                           <i class='bx bx-cloud'></i>  
+            <div class="size-matters">CLOUD BASED SCADA</div>
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a id="dashboard-link" href="/dash">
+                <i class='bx bx-category'>Dashboard</i>
+            </a>
+          </li>    
+          <li class="sidebar-list-item">
+            <a id="dashboard-link" href="/analytics" target="_blank">
+                <i class='bx bx-pie-chart'>Analytics</i>
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a id="dashboard-link" href="/bar" target="_blank">
+                <i class='bx bx-alarm'>Alarm</i>
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a id="dashboard-link" href="/Plant" target="_blank">
+                <i class='bx bxs-factory'>Plant</i>
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a id="dashboard-link" href="/about" target="_blank">
+                <i class='bx bx-user'>About</i>
+            </a>
+          </li>
+
+
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!--MAIN-->
+      <main class="main-container">
+        <div class="main-title">
+            <h2></h2>
+        </div>
+
+        <div class="main-cards">
+         
+        </div>
+        <div class="sub-container">
+          <div class="container-header">
+            <h2>DATA</h2>
+          </div>
+          <div class="container-body">
+            <div class="container-heading">
+              <h3 class="top1">INPUT</h3>
+              <h3 class="top">READING</h3>
+              
+            </div>
+            <div>
+						<form>
+              <div class="table">
+							<div class="Input">
+								<input value="{{data[0].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[0].Reading }}" disabled>
+                </div>		
+							</div>
+
+							<div class="Input">
+								<input value="{{data[1].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[1].Reading }}" disabled>
+                </div>
+							</div>
+
+							<div class="Input">
+								<input value="{{data[2].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[2].Reading }}" disabled>
+                </div>								
+							</div>
+
+							<div class="Input">
+								<input value="{{data[3].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[3].Reading }}" disabled>
+                </div>								
+							</div>
+
+							<div class="Input">
+								<input value="{{data[4].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[4].Reading }}" disabled>
+                </div>								
+							</div>
+
+							<div class="Input">
+								<input value="{{data[5].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[5].Reading }}" disabled>
+                </div>								
+							</div>
+
+              <div class="Input" >
+								<input value="{{data[6].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[6].Reading }}" disabled>
+                </div>								
+							</div>
+
+              <div class="Input">
+								<input value="{{data[7].Input}}"disabled>
+                <div class="Input1">
+                  <input type="text" value="{{ data[7].Reading }}" disabled>
+                </div>								
+							</div>							
+							</div>
+            </div>
+						</form>
+  
+          </div>
+        </div>
+
+        <!--MAIN CHARTS-->
+
+        <div class="main-charts">
+          <div class="can">
+            <canvas id="myChart"></canvas>
+          </div>
+          <script>
+            fetch('/data')
+              .then(response => response.json())
+              .then(data => {
+                var subset = {
+                 "Inlet-Temperature": data.datasets[0].data[0],
+                 "Bed-Temperature": data.datasets[0].data[1],
+                 "Exhaust-Temperature": data.datasets[0].data[2],
+
+               
+                };
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'doughnut',
+                  data: {
+                    labels: Object.keys(subset),
+                    datasets: [{
+                      data: Object.values(subset),
+                      backgroundColor: [
+                        'rgba(255, 99, 132, 1)', 
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                      ],
+                      borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                      ],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    legend: {
+                      display: true,
+                      position: 'bottom',
+                    },
+                    title: {
+                      display: true,
+                      text: 'Sales in Jan, Feb, and March',
+                    }
+                  }
+                });
+              });
+          </script>
+
+        </div>
+
+        <!--GAUGE-CHART-->  
+
+        <div class="gauge-chart">
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['gauge']});
+        google.charts.setOnLoadCallback(fetchData);
+
+        function fetchData() {
+            // Make an HTTP request to your Flask API endpoint to fetch the data
+            fetch('/API')
+                .then(response => response.json())
+                .then(data => drawChart(data));
+        }
+
+        function drawChart(data) {
+            // Extract the values of jan, feb, and mar from the data object
+            var Gun1 = data.find(obj => obj.Input === "Spray Gun-1 Pressure").Reading;
+            var Gun2 = data.find(obj => obj.Input === "Spray Gun-2 Pressure").Reading;
+            var Gun3 = data.find(obj => obj.Input === "Spray Gun-3 Pressure").Reading;
+
+            // Update the data array with the fetched values
+            var chartData = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['', Gun1],
+                ['', Gun2],
+                ['', Gun3],
+            ]);
+            var options = {
+              width: 800,
+              height: 240,
+              redFrom: 90,
+              redTo: 100,
+              yellowFrom:75,
+              yellowTo: 90,
+              minorTicks: 5,
+              max: 100,
+              greenFrom: 0,
+              greenTo: 100,
+              animation:{
+                duration: 1000,
+                easing: 'out',
+                
+              },
+              
+              
+              gaugeType: 'semi',
+              arcAngle: 180,
+              startAngle: 180,
+              // Add the labels to the gauge
+              axisLabels: ['', '', '', '', '', '', '', '', '', '', '', ''],
+              // Position the labels above the gauge
+              ticks: [0, {v:Gun1, f:'Spray Gun-1 Pressure'}, {v:Gun2, f:'Spray Gun-2 Pressure'}, {v:Gun3, f:'Spray Gun-3 Pressure'}, 10],
+              // Remove the label text from inside the gauge
+              fontSize: 50,
+              // Increase the padding at the top of the chart to make room for the labels
+              chartArea:{top:40},
+              barWidth: 100,
+              arcThickness: 30,
+            };
+
+            // Add label text outside the gauge
+            var chartContainer = document.createElement('div');
+            chartContainer.className = 'chart-container';
+
+            var janLabel = document.createElement('div');
+            janLabel.className = 'label';
+            janLabel.innerText = 'Spray Gun-1 Pressure';
+
+            var aprilLabel = document.createElement('div');
+            aprilLabel.className = 'label1';
+            aprilLabel.innerText = 'Spray Gun-2 Pressure';
+
+            var mayLabel = document.createElement('div');
+            mayLabel.className = 'label2';
+            mayLabel.innerText = 'Spray Gun-3 Pressure';
+
+            var chartDiv = document.createElement('div');
+            chartDiv.id = 'chart_div';
+
+
+            chartContainer.appendChild(janLabel);
+            chartContainer.appendChild(aprilLabel);
+            chartContainer.appendChild(mayLabel);
+            chartContainer.appendChild(chartDiv);
+
+            document.body.appendChild(chartContainer);
+
+            var chart = new google.visualization.Gauge(chartDiv);
+
+            chart.draw(chartData, options);
+        }
+    
+
+    </script>
+        </div>
+      </main>
+    </div>
+
+
+
+
+ 
+  </body>
+</html>

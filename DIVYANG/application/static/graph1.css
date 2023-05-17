@@ -1,0 +1,54 @@
+/* Set body styles */
+body {
+	font-family: Arial, sans-serif;
+	
+	
+  }
+  
+  /* Style the main container */
+
+  .header{
+	color: azure;
+	display: flex;
+	padding-left: 45%;
+	padding-top: 0%;
+	background-color: #1c6bd3;
+  }
+  .main-container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 10px;
+	background-color: #fff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	width: 100%;
+	height: 30%;
+	margin-left: 0%;
+	min-height: min-content;
+  }
+  
+  /* Style the plot element */
+  #plotElement {
+	height: 400px;
+	margin-top: 20px;
+  }
+  
+  /* Style the plot title */
+  .gtitle {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	text-align: center;
+  }
+  
+  /* Style the x and y axes */
+  .gxaxis,
+  .gyaxis {
+	font-size: 16px;
+	font-weight: bold;
+  }
+  
+  /* Style the legend */
+  .glegend {
+	font-size: 16px;
+  }
+  

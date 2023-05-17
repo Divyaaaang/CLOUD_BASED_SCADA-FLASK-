@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics</title>
+    <style>
+        body{
+            background-color: rgb(179, 203, 248);
+        }
+        .graph {
+            width: 50%;
+            float: left;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='graphs.css') }}">
+</head>
+</head>
+<body>
+    
+    <header class="header"><h2>ANALYTICS<h2></header>
+        <div class="main-graph">
+    <div class="graph">
+        {% include 'graph1.html' %}
+    </div>
+    <div class="graph1">
+        {% include 'graph2.html' %}
+    </div>
+</div>
+</body>
+</html>
