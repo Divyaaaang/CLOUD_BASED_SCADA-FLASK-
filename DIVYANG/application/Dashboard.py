@@ -58,7 +58,7 @@ def get_names():
 
 #------------------MAIN-CHARTS------------------------
 @app.route("/data")
-def get_data():
+def get_data(): 
     # Make HTTP request to Flask API to fetch sales data
     response = requests.get("http://localhost:5000/API")
     data = response.json()
